@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="cards">
+    {% for post in posts %}
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h2 class="card-title">{{ post.title }}</h2><p class="card-subtitle mb-2 text-body-secondary">{{ post.created_at }}</p>
+            <h4 class="card-text">{{ post.body }}</h4>
+            {% if current_user.get_id() == post.author|string %}
+                <a href="/delete-post/{{ post.post_id }}" class="card-link">Delete</a>
+                <a href="/edit-post?post={{ post.post_id }}" class="card-link">Edit</a>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
